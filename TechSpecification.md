@@ -20,7 +20,7 @@
 本系统的主要功能部件包括ARM Cortex-M3核、决策树算法硬件加速器、AHB总线矩阵、DDR控制器、片上存储模块、摄像头模块、显示器模块、APB外设等，系统框图见图2.1。
 
 <div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/Architecture.png"></div>
-<center style="font-size:10px;color:#C0C0C0">图2.1  系统总框图</center>
+<p align="center" style="font-size:10px;color:#C0C0C0">图2.1  系统总框图</p>
 
 本系统采用ARM公司提供的DesignStart Eval版本Cortex-M3软核IP 作为中央处理单元，SOC整体部署在FPGA平台上。
 
@@ -33,7 +33,7 @@ ARM公司还提供了一个相当有用的工具——Cortex-M System Design Kit
 更为重要的是，CMSDK提供了可配置的总线矩阵模块（AHB Bus Matrix）。我们可以利用总线矩阵模块作为系统总线与DTCM及低速外设的互联模块，同时配置好各个部件的地址映射。图2.2展示的是本项目利用CMSDK总线矩阵模块配置地址映射的脚本代码。其中，总线矩阵只有一个slave端（S0_SYS），连接到Cortex-M3的系统总线端口；以及两个master端（M0_DTCM及M1_APB_BRIDGE），分别连接DTCM及APB低速外设部分。slave端与两个master端将在总线矩阵内部进行互联与仲裁，从而使M3能够通过预设的地址方便地访问、控制系统的各部件。
 
 <div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/busMatrixSet.png"></div>
-<center style="font-size:10px;color:#C0C0C0">图2.2  CMSDK总线矩阵地址映射配置</center>
+<p align="center" style="font-size:10px;color:#C0C0C0">图2.2  CMSDK总线矩阵地址映射配置</p>
 
 为了达到更好的性能，我们并不直接将低速的LED、UART等外设连接到M3的AHB系统总线上。对于低速外设，我们采用的是APB协议，这将涉及到AHB协议与APB协议的相互转换。得益于CMSDK的“AHB to APB”转接模块，我们可以先将LED、UART等外设通过APB协议挂载到APB Bridge模块上，然后再把APB Bridge模块挂载到AHB总线上。
 
@@ -43,7 +43,7 @@ ARM公司还提供了一个相当有用的工具——Cortex-M System Design Kit
 我们使用OmniVision公司的ov5640型摄像头实时采集图像数据。经过测试，我们发现当采集图像大小设置为640×480时能够在检测速度和检测准确度上取得良好平衡。
 
 <div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/camera.png" width=50%></div>
-<center style="font-size:10px;color:#C0C0C0">图2.3  摄像头模块</center>
+<p align="center" style="font-size:10px;color:#C0C0C0">图2.3  摄像头模块</p>
 
 图2.3展示了摄像头模块的详细框图。首先，我们的配置单元（CONFIG）将摄像头的配置信息通过I2C协议传输给摄像头外设。摄像头经过配置后将逐帧采集图像数据，摄像头采集到的图像为RGB565格式，即每个像素点占据16位数据空间（红色通道5位、绿色通道6位、蓝色通道5位）。由于每个时钟仅能传输8位数据，因此需要2个时钟周期才能完成一个像素数据的传输，为此我们加入了8bit转16bit的转换单元。
 
@@ -57,10 +57,10 @@ ARM公司还提供了一个相当有用的工具——Cortex-M System Design Kit
 显示器模块要解决的关键问题是如何做到图像读写不冲突？若写图像的地址与读图像的地址是相同的，显示器显示的图像数据有可能是正在从摄像头写入的数据，从而产生图像割裂。因此，我们设置了两个不同的地址，它们交替作为图像的写地址和读地址，实现读写分离，如图2.5所示。
 
 <div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/monitor.png" width=50%></div>
-<center style="font-size:10px;color:#C0C0C0">图2.4  显示器模块</center>
+<p align="center" style="font-size:10px;color:#C0C0C0">图2.4  显示器模块</p>
 
 <div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/addrSwitch.png"></div>
-<center style="font-size:10px;color:#C0C0C0">图2.5  图像读写地址分离与交替变换过程</center>
+<p align="center" style="font-size:10px;color:#C0C0C0">图2.5  图像读写地址分离与交替变换过程</p>
 
 ### 2.4	APB外设
 本系统的APB外设有LED灯、UART、动作发生器（Igiter）、计时器（Timer）这几个模块，它们由APB总线挂载到系统中，负责实现系统的辅助功能。
@@ -104,7 +104,7 @@ Cortex-M3的启动文件需要用汇编语言编写，主要可以分为三个�
 
 <div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/startup1.png" width=60%></div>
 <div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/startup2.png" width=60%></div>
-<center style="font-size:10px;color:#C0C0C0">图3.1  启动文件部分代码</center>
+<p align="center" style="font-size:10px;color:#C0C0C0">图3.1  启动文件部分代码</p>
 
 对于在M3上运行的软件而言，之前搭建的SOC中的ITCM就相当于ROM空间，软件的启动代码及操作指令都保存在这里。而DTCM相当于RAM空间，堆栈空间由RAM开辟，我们把堆和栈的大小分别设置为1MB。
 
@@ -113,12 +113,12 @@ Cortex-M3一共支持256个中断，其中包含240个外部中断。最高优�
 对于低速外设的访问，我们还需要定义简单的驱动函数，通过对外设所在地址进行读写操作，从而控制外设的动作。以LED的控制为例，我们先定义一个结构体，方便访问LED，如图3.2。注意，需要在定义LED变量时加入volatile关键字，禁止编译器对变量访问优化。如果不加这个volatile关键字，程序可能会利用cache当中的数据，可能读取的是该变量过时的值，或者不能把新的值写入物理地址中，加了volatile，就在需要用的时候，程序重新去对应的地址去提取，保证是最新的。
 
 <div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/structure.png" width=50%></div>
-<center style="font-size:10px;color:#C0C0C0">图3.2  LED访问结构体</center>
+<p align="center" style="font-size:10px;color:#C0C0C0">图3.2  LED访问结构体</p>
 
 而用户程序部分，我们采用C语言实现所选用的决策树智能算法。在利用keil编译软件代码时，需要用fromelf工具将axf可执行文件转换为面向Verilog HDL内存模型的hex文件，如图3.3所示。hex文件是由axf文件的32位指令翻译成16进制表示后的可执行代码。得到特定格式的hex文件后，我们就可以在ITCM的Verilog代码中通过readmemh语句将编译得到的可执行代码初始化到ROM中。需要注意的是，需要在执行fromelf工具时添加--vhx参数（转换为面向Verilog HDL内存模型的hex文件），否则系统软件将无法启动，这个问题曾阻碍了我们队伍较长时间。
 
 <div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/keiloption.png"></div>
-<center style="font-size:10px;color:#C0C0C0">图3.3  将axf文件转换为特定格式的hex文件</center>
+<p align="center" style="font-size:10px;color:#C0C0C0">图3.3  将axf文件转换为特定格式的hex文件</p>
 
 ## 4.	智能算法硬件加速器设计
 通过分析最初版本的人脸检测系统的性能瓶颈，我们团队为检测系统提出了软硬件高度配合与定制化的多项加速方案，包括图像灰度转换单元、片上存储优化、多线程移窗并行加速器等硬件加速模块。它们共同组成了一个高效的加速系统集群，极大提升了本系统检测人脸的速度。
@@ -132,7 +132,7 @@ Cortex-M3一共支持256个中断，其中包含240个外部中断。最高优�
 我们在检查决策树硬件加速器的运行时序时发现，受到DDR传输延迟的限制，将数据从DDR读取到加速器内需要消耗大量的时间。如图4.1所示，尽管在优化了DDR访问的配置后，加速器从DDR读取一个32位数据仍然需要耗费40~50个时钟，这足以完成近20个加速器的常规操作。
 
 <div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/ddraccess.png" width=60%></div>
-<center style="font-size:10px;color:#C0C0C0">图4.1  从DDR读取数据耗时与加速器常规操作耗时对比</center>
+<p align="center" style="font-size:10px;color:#C0C0C0">图4.1  从DDR读取数据耗时与加速器常规操作耗时对比</p>
 
 我们通过计算分析发现，算法读取参数文件的数据传输量占据总数据传输量的40%。为了尽可能减少DDR的访问频率，我们将预先训练好的决策树参数文件从DDR转移到FPGA片上块状存储（Block RAM）内。相比于延时较长的DDR访问，加速器对片上存储Block RAM的访问仅需要2个时钟延时就能完成。
 
@@ -140,7 +140,7 @@ Cortex-M3一共支持256个中断，其中包含240个外部中断。最高优�
 多线程移窗并行加速器是硬件加速系统的核心成员。它由AXI控制单元、加速核、中断控制单元等部件所组成，如图4.2所示。
 
 <div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/accelerator.png" width=60%></div>
-<center style="font-size:10px;color:#C0C0C0">图4.2  多线程移窗并行加速器框架</center>
+<p align="center" style="font-size:10px;color:#C0C0C0">图4.2  多线程移窗并行加速器框架</p>
 
 #### 4.3.1	加速器的数据流动
 为了尽可能减短数据的传输路径，我们把移窗并行加速器直接接在DDR上，所有待处理的输入数据都不会经过Cortex-M3处理器，加速器将从片上存储模块（Block RAM）以及DDR中直接读取所需要的数据，并将检测结果直接存回DDR。因此，我们为每个加速器核都配备了一个独立的AXI控制单元来和DDR进行数据传输，使加速器核能够独立存取DDR上的数据。同时，我们采用了双端口的片上存储Block RAM单元，为多线程加速器访问片上数据提供带宽支持。
@@ -155,7 +155,7 @@ Cortex-M3一共支持256个中断，其中包含240个外部中断。最高优�
 为此，我们的人脸检测系统引入了多线程移窗的概念，采用多个硬件加速核组成了多线程的并行硬件加速器，每个加速核都可以独立历遍级联决策树，处理一个移窗位置的运算。图4.3展示了单线程移窗和多线程移窗的区别，在多线程移窗模式下，加速器可以同时处理多个移窗位置的检测任务，从而极大提高了人脸检测的速度。
 
 <div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/multiThreads.png" width=90%></div>
-<center style="font-size:10px;color:#C0C0C0">图4.3  单线程串行移窗与多线程并行移窗对比</center>
+<p align="center" style="font-size:10px;color:#C0C0C0">图4.3  单线程串行移窗与多线程并行移窗对比</p>
 
 ### 4.4	其他加速优化策略
 我们团队还持续监测检测系统每一次迭代优化后的性能瓶颈，并根据瓶颈分析结果给下一步优化方向提供参考。因此，除了上述由我们团队独立设计的硬件加速模块外，我们还找到了许多细节性而十分关键的算法加速方法。
@@ -165,7 +165,7 @@ Cortex-M3一共支持256个中断，其中包含240个外部中断。最高优�
 我们对DDR进行的数据访问都是随机地址的，为此我们将用户层地址到物理层地址的映射模式设置为更适合数据随机访问的Bank-Row-Column模式，进一步优化了DDR的访问速度。
 
 <div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/bankrowcol.png" width=80%></div>
-<center style="font-size:10px;color:#C0C0C0">图4.4  Bank-Row-Column模式的内存地址映射</center>
+<p align="center" style="font-size:10px;color:#C0C0C0">图4.4  Bank-Row-Column模式的内存地址映射</p>
 
 在AXI互联模块中，我们用同步整数比时钟转换（Synchronous integer-ratio conversion）代替了需要利用更多硬件资源且会引入更大延时的异步时钟转换（Asynchronous clock conversion）。
 
@@ -181,7 +181,7 @@ Cortex-M3一共支持256个中断，其中包含240个外部中断。最高优�
 图4.5展示了采用硬件加速器前后的人脸检测时间对比情况。
 
 <div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/accComp.png" width=90%></div>
-<center style="font-size:10px;color:#C0C0C0">图4.5  未采用硬件加速器（左）和采用硬件加速器（右）</center>
+<p align="center" style="font-size:10px;color:#C0C0C0">图4.5  未采用硬件加速器（左）和采用硬件加速器（右）</p>
 
 ## 参考文献
  [1]	Nenad Marku V S, Frljak Miroslav, Pand V Z I C Igor-S, et al. Object detection with pixel intensity comparisons organized in decision trees[J]. arXiv preprint arXiv:1305.4537, 2013.
