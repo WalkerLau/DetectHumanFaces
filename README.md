@@ -43,9 +43,13 @@
 
 文件 `Docs/Keil and Vivado Configurations.pdf` 详细介绍了Keil与Vivado IP的配置。
 
-文件夹 `hardware` 包含了所有硬件代码（Verilog代码）、约束文件和决策树参数文件 `facefinder.coe`（用于初始化Block RAM）；文件夹 `software` 包含了所有软件代码（C代码等）。
+文件夹 `hardware` 包含了所有硬件代码（Verilog代码）、约束文件和决策树参数文件 `facefinder.coe`（.coe文件用于初始化Block RAM）。
 
-比特流文件 `minSOC.bit` 仅可用于 “黑金 ALINX AX7050” 开发板的下板。
+文件夹 `software` 包含了所有软件代码（C代码等），创建完Keil项目之后需将该文件夹里的所有文件添加到项目。
+
+`files/minSOC.hex` 是Keil编译好的机械码，用于在vivado中初始化ROM。
+
+`files/minSOC.bit` 是vivado编译好的比特流文件，仅可用于 “黑金 ALINX AX7050” 开发板的下板。
 
 ## 联系作者
 Xuanzhi LIU (xuanzhi@mail.ustc.edu.cn)
