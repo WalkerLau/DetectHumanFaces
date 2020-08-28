@@ -19,8 +19,8 @@
 ## 实现效果
 经过Cortex-M3及硬件加速器的运算后，我们的人脸检测系统可以实现18帧/秒的检测能力。
 
-<div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/show.png"></div> 
-<div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/accComp.png"></div>
+<div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/show.png" width=80%></div> 
+<div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/accComp.png" width=80%></div>
 
 
 ## 硬件及软件平台
@@ -38,6 +38,9 @@
   
   * vivado 2019.2
   
+<div align="center"><img src="https://raw.githubusercontent.com/WalkerLau/DetectHumanFaces/master/images/resource.png" width=80%></div>
+<p align="center" style="font-size:10px;color:#C0C0C0">FPGA资源消耗量</p>
+
 ## 系统的技术细节
 关于本人脸检测系统的具体技术细节，如系统架构、检测算法、加速器的设计等，都可以在本 Github repo 的《[TechSpecification](https://github.com/WalkerLau/DetectHumanFaces/blob/master/TechSpecification.md)》中找到。
 
