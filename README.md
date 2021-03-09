@@ -54,7 +54,7 @@
 
 `files/minSOC.bit` 是vivado编译好的比特流文件，仅可用于 “黑金 ALINX AX7050” 开发板的下板。
 
-`facefinder.coe`是决策树参数文件，需要添加到BRAM中，如何添加请留意`Docs/Keil and Vivado Configurations.pdf`关于Block memory一节。
+`hardware/facefinder.coe`是决策树参数文件，需要添加到BRAM中，如何添加请留意`Docs/Keil and Vivado Configurations.pdf`关于Block memory一节。
 
 ## 联系作者
 Xuanzhi LIU (xuanzhi@mail.ustc.edu.cn)
