@@ -56,9 +56,9 @@
 
 `hardware/facefinder.coe`是决策树参数文件，需要添加到BRAM中，如何添加请留意`Docs/Keil and Vivado Configurations.pdf`关于Block memory一节。
 
-## 联系作者
-Xuanzhi LIU (xuanzhi@mail.ustc.edu.cn)
+## 作者
+Xuanzhi LIU
 
-Qiao HU (qhu@mail.ustc.edu.cn)
+Qiao HU
 
-Zongwu HE (zwhe1@mail.ustc.edu.cn)
+Zongwu HE
